@@ -1,0 +1,41 @@
+name: Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Lint charters, the map, the words, the manifest
+        run: python3 scripts/check.py
+      - name: The map, generated from kit.json, matches what is committed
+        run: python3 scripts/build_vault.py --check
+      - name: Install into a temporary home and count what landed
+        run: |
+          H="$(mktemp -d)"
+          HOME="$H" node scripts/install.js --tools all --yes
+          test -f "$H/.claude/skills/constellation-guide/SKILL.md"
+          test -f "$H/.claude/skills/morning-brief/SKILL.md"
+          test "$(ls "$H/.claude/agents" | wc -l)" -eq 8
+          test "$(ls "$H/.claude/skills" | wc -l)" -eq 10
+      - name: Build the starter vault and exercise the hooks without a model
+        run: |
+          set -euo pipefail
+          V="$(mktemp -d)/vault"
+          HOME="$(mktemp -d)" node scripts/install.js --tools claude --vault "$V" --yes >/dev/null
+          test -f "$V/Home.md" && test -f "$V/todo.md" && test -f "$V/.obsidian/daily-notes.json" && test -f "$V/.stellar/manifest.json"
+          test -d "$V/Daily" && test -d "$V/inputs/calendar"
+          cd "$V"
+          python3 scripts/newsroom.py status
+          python3 scripts/newsroom.py run draco-chief-of-staff --task "dry" --dry-run | head -3
+          ev() { echo "$1" | env NEWSROOM_DESK="$2" python3 "scripts/hooks/$3"; }
+          ev '{"cwd":"'"$V"'","tool_name":"Write","tool_input":{"file_path":"'"$V"'/Daily/2026-09-28.md"}}' draco-chief-of-staff write-zone.py
+          ! ev '{"cwd":"'"$V"'","tool_name":"Write","tool_input":{"file_path":"'"$V"'/todo.md"}}' draco-chief-of-staff write-zone.py
+          echo "hooks behave"

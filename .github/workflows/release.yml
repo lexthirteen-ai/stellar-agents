@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+    paths: ["VERSION"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Resolve the tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="v$(tr -d '[:space:]' < VERSION)"
+          echo "TAG=${TAG}" >> "$GITHUB_ENV"
+          if gh release view "${TAG}" >/dev/null 2>&1; then echo "SKIP=1" >> "$GITHUB_ENV"; fi
+      - name: Build the zip
+        if: env.SKIP != '1'
+        run: |
+          set -euo pipefail
+          NAME="stellar-agents-${TAG}"
+          mkdir -p "dist/${NAME}"
+          git archive --format=tar HEAD | tar -x -C "dist/${NAME}"
+          rm -rf "dist/${NAME}/.github"
+          (cd dist && zip -qr "${NAME}.zip" "${NAME}")
+          echo "ZIP=dist/${NAME}.zip" >> "$GITHUB_ENV"
+          awk '/^## /{n++} n==1' CHANGELOG.md | tail -n +2 > release-notes.tmp
+      - name: Create the GitHub Release
+        if: env.SKIP != '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "${TAG}" "${ZIP}" --title "Stellar Agents ${TAG}" --notes-file release-notes.tmp

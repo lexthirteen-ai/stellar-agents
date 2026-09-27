@@ -1,0 +1,293 @@
+{
+  "name": "Stellar Agents",
+  "version": "0.1.0",
+  "group": "constellation",
+  "guide": ".agents/guide",
+  "runtime": {
+    "runner": "scripts/newsroom.py",
+    "gate": "scripts/copydesk.py",
+    "hooks": "scripts/hooks",
+    "settings": "newsroom/.claude/settings.json",
+    "evals": "scripts/eval.py"
+  },
+  "tools": [
+    {
+      "key": "claude",
+      "label": "Claude Code",
+      "global": "~/.claude/skills/ and ~/.claude/agents/",
+      "native": "/plugin marketplace add ./stellar-agents, then /plugin install constellation@stellar-agents",
+      "page": "integrations/claude-code"
+    },
+    {
+      "key": "codex",
+      "label": "Codex",
+      "global": "~/.agents/skills/",
+      "native": "npx skills add ./stellar-agents --agent codex",
+      "page": "integrations/codex"
+    },
+    {
+      "key": "gemini",
+      "label": "Gemini CLI",
+      "global": "~/.gemini/skills/",
+      "native": "gemini skills install ./stellar-agents/.agents/<star>",
+      "page": "integrations/gemini-cli"
+    },
+    {
+      "key": "openclaw",
+      "label": "OpenClaw",
+      "global": "~/.agents/skills/",
+      "native": "openclaw skills install ./.agents/<star> --as <id>, from the unzipped folder",
+      "page": "integrations/openclaw"
+    },
+    {
+      "key": "hermes",
+      "label": "Hermes",
+      "global": "~/.hermes/skills/constellation/",
+      "native": "node scripts/install.js --tools hermes",
+      "page": "integrations/hermes"
+    }
+  ],
+  "stars": [
+    {
+      "id": "draco-chief-of-staff",
+      "star": "draco",
+      "path": ".agents/draco",
+      "tier": "core",
+      "role": "chief_of_staff",
+      "cadence": "daily 07:00",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Write"
+      ],
+      "write_zones": [
+        "Daily/"
+      ],
+      "receives_from": [
+        "owner",
+        "carina-managing-editor",
+        "alcyone-scheduler",
+        "mira-ombudsman"
+      ],
+      "hands_to": [
+        "owner"
+      ],
+      "skills": [
+        "morning-brief"
+      ],
+      "free_skills": [
+        "morning-brief"
+      ]
+    },
+    {
+      "id": "carina-managing-editor",
+      "star": "carina",
+      "path": ".agents/carina",
+      "tier": "core",
+      "role": "managing_editor",
+      "cadence": "Mon 06:15",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Write"
+      ],
+      "write_zones": [
+        "outputs/plan/",
+        "governance/proposals/"
+      ],
+      "receives_from": [
+        "owner",
+        "aurora-reporter",
+        "mira-ombudsman"
+      ],
+      "hands_to": [
+        "draco-chief-of-staff",
+        "selene-archivist"
+      ],
+      "skills": [],
+      "free_skills": []
+    },
+    {
+      "id": "alcyone-scheduler",
+      "star": "alcyone",
+      "path": ".agents/alcyone",
+      "tier": "core",
+      "role": "scheduler",
+      "cadence": "daily 06:50",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Write"
+      ],
+      "write_zones": [
+        "outputs/schedule/"
+      ],
+      "receives_from": [
+        "owner",
+        "schedule"
+      ],
+      "hands_to": [
+        "draco-chief-of-staff"
+      ],
+      "skills": [],
+      "free_skills": []
+    },
+    {
+      "id": "aurora-reporter",
+      "star": "aurora",
+      "path": ".agents/aurora",
+      "tier": "core",
+      "role": "reporter",
+      "cadence": "daily 06:30",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Write"
+      ],
+      "write_zones": [
+        "outputs/signals/"
+      ],
+      "receives_from": [
+        "owner"
+      ],
+      "hands_to": [
+        "electra-correspondent",
+        "carina-managing-editor"
+      ],
+      "skills": [],
+      "free_skills": []
+    },
+    {
+      "id": "electra-correspondent",
+      "star": "electra",
+      "path": ".agents/electra",
+      "tier": "core",
+      "role": "correspondent",
+      "cadence": "after every reporter run",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Write"
+      ],
+      "write_zones": [
+        "outputs/drafts/"
+      ],
+      "receives_from": [
+        "owner",
+        "aurora-reporter",
+        "vesper-copy-desk"
+      ],
+      "hands_to": [
+        "vesper-copy-desk"
+      ],
+      "skills": [],
+      "free_skills": []
+    },
+    {
+      "id": "vesper-copy-desk",
+      "star": "vesper",
+      "path": ".agents/vesper",
+      "tier": "core",
+      "role": "copy_desk",
+      "cadence": "after every draft",
+      "tools": [
+        "Read",
+        "Glob",
+        "Bash"
+      ],
+      "write_zones": [
+        "outputs/staged/",
+        "outputs/rejected/"
+      ],
+      "receives_from": [
+        "electra-correspondent"
+      ],
+      "hands_to": [
+        "owner",
+        "electra-correspondent"
+      ],
+      "skills": [],
+      "free_skills": []
+    },
+    {
+      "id": "mira-ombudsman",
+      "star": "mira",
+      "path": ".agents/mira",
+      "tier": "core",
+      "role": "ombudsman",
+      "cadence": "daily 20:00, Fri 16:00",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Write"
+      ],
+      "write_zones": [
+        "outputs/review/"
+      ],
+      "receives_from": [
+        "owner",
+        "schedule"
+      ],
+      "hands_to": [
+        "draco-chief-of-staff",
+        "carina-managing-editor"
+      ],
+      "skills": [],
+      "free_skills": []
+    },
+    {
+      "id": "selene-archivist",
+      "star": "selene",
+      "path": ".agents/selene",
+      "tier": "core",
+      "role": "archivist",
+      "cadence": "on a tick",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Write"
+      ],
+      "write_zones": [
+        "governance/registry.json",
+        "governance/audit-log.md",
+        "governance/ledger.md",
+        "governance/proposals/",
+        "outputs/catalog/",
+        "goals.md",
+        "pipeline.md",
+        "money.md",
+        "HOUSE-STYLE.md"
+      ],
+      "receives_from": [
+        "owner",
+        "carina-managing-editor"
+      ],
+      "hands_to": [
+        "owner"
+      ],
+      "skills": [],
+      "free_skills": []
+    }
+  ],
+  "packs": [],
+  "owner_files": [
+    "goals.md",
+    "pipeline.md",
+    "money.md",
+    "todo.md",
+    "HOUSE-STYLE.md",
+    "Daily/",
+    "governance/",
+    "outputs/",
+    "inputs/",
+    "feedback/"
+  ],
+  "upgrade_suffix": "new"
+}

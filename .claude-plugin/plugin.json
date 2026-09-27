@@ -1,0 +1,43 @@
+{
+  "name": "constellation",
+  "displayName": "Stellar Agents",
+  "version": "0.1.0",
+  "description": "Eight agents that plan a solo founder's day, and one of them working: Draco writes the morning brief into an Obsidian daily note from a calendar export and a todo list. Every star stops one step before anything goes out.",
+  "author": {
+    "name": "charmthirteen",
+    "url": "https://charmthirteen.com"
+  },
+  "homepage": "https://github.com/lexthirteen-ai/stellar-agents",
+  "repository": "https://github.com/lexthirteen-ai/stellar-agents",
+  "license": "CC-BY-NC-4.0 for documents, MIT for scripts, see LICENSE",
+  "keywords": [
+    "agents",
+    "skills",
+    "governance",
+    "human-in-the-loop",
+    "audit-trail",
+    "constellation"
+  ],
+  "skills": [
+    "./.agents",
+    "./.agents/draco",
+    "./.agents/carina",
+    "./.agents/alcyone",
+    "./.agents/aurora",
+    "./.agents/electra",
+    "./.agents/vesper",
+    "./.agents/mira",
+    "./.agents/selene",
+    "./.agents/draco/morning-brief"
+  ],
+  "agents": [
+    "./.agents/draco/SKILL.md",
+    "./.agents/carina/SKILL.md",
+    "./.agents/alcyone/SKILL.md",
+    "./.agents/aurora/SKILL.md",
+    "./.agents/electra/SKILL.md",
+    "./.agents/vesper/SKILL.md",
+    "./.agents/mira/SKILL.md",
+    "./.agents/selene/SKILL.md"
+  ]
+}

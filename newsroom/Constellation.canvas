@@ -1,0 +1,248 @@
+{
+  "nodes": [
+    {
+      "id": "owner",
+      "type": "text",
+      "text": "# You\nThe brief ends here. Tick the box. Send by hand.",
+      "x": -150,
+      "y": -700,
+      "width": 300,
+      "height": 120,
+      "color": "4"
+    },
+    {
+      "id": "draco-chief-of-staff",
+      "type": "file",
+      "file": ".claude/skills/draco-chief-of-staff/SKILL.md",
+      "x": -150,
+      "y": -90,
+      "width": 300,
+      "height": 180,
+      "color": "5"
+    },
+    {
+      "id": "draco-chief-of-staff-note",
+      "type": "text",
+      "text": "**Draco** (core) daily 07:00\nwrites Daily/",
+      "x": -150,
+      "y": 100,
+      "width": 300,
+      "height": 80,
+      "color": "5"
+    },
+    {
+      "id": "carina-managing-editor",
+      "type": "file",
+      "file": ".claude/skills/carina-managing-editor/SKILL.md",
+      "x": 240,
+      "y": -700,
+      "width": 300,
+      "height": 180,
+      "color": "5"
+    },
+    {
+      "id": "carina-managing-editor-note",
+      "type": "text",
+      "text": "**Carina** (core) Mon 06:15\nwrites outputs/plan/, governance/proposals/",
+      "x": 240,
+      "y": -510,
+      "width": 300,
+      "height": 80,
+      "color": "5"
+    },
+    {
+      "id": "alcyone-scheduler",
+      "type": "file",
+      "file": ".claude/skills/alcyone-scheduler/SKILL.md",
+      "x": 727,
+      "y": -90,
+      "width": 300,
+      "height": 180,
+      "color": "5"
+    },
+    {
+      "id": "alcyone-scheduler-note",
+      "type": "text",
+      "text": "**Alcyone** (core) daily 06:50\nwrites outputs/schedule/",
+      "x": 727,
+      "y": 100,
+      "width": 300,
+      "height": 80,
+      "color": "5"
+    },
+    {
+      "id": "aurora-reporter",
+      "type": "file",
+      "file": ".claude/skills/aurora-reporter/SKILL.md",
+      "x": 553,
+      "y": 671,
+      "width": 300,
+      "height": 180,
+      "color": "5"
+    },
+    {
+      "id": "aurora-reporter-note",
+      "type": "text",
+      "text": "**Aurora** (core) daily 06:30\nwrites outputs/signals/",
+      "x": 553,
+      "y": 861,
+      "width": 300,
+      "height": 80,
+      "color": "5"
+    },
+    {
+      "id": "electra-correspondent",
+      "type": "file",
+      "file": ".claude/skills/electra-correspondent/SKILL.md",
+      "x": -150,
+      "y": 1010,
+      "width": 300,
+      "height": 180,
+      "color": "5"
+    },
+    {
+      "id": "electra-correspondent-note",
+      "type": "text",
+      "text": "**Electra** (core) after every reporter run\nwrites outputs/drafts/",
+      "x": -150,
+      "y": 1200,
+      "width": 300,
+      "height": 80,
+      "color": "5"
+    },
+    {
+      "id": "vesper-copy-desk",
+      "type": "file",
+      "file": ".claude/skills/vesper-copy-desk/SKILL.md",
+      "x": -853,
+      "y": 671,
+      "width": 300,
+      "height": 180,
+      "color": "5"
+    },
+    {
+      "id": "vesper-copy-desk-note",
+      "type": "text",
+      "text": "**Vesper** (core) after every draft\nwrites outputs/staged/, outputs/rejected/",
+      "x": -853,
+      "y": 861,
+      "width": 300,
+      "height": 80,
+      "color": "5"
+    },
+    {
+      "id": "mira-ombudsman",
+      "type": "file",
+      "file": ".claude/skills/mira-ombudsman/SKILL.md",
+      "x": -1027,
+      "y": -90,
+      "width": 300,
+      "height": 180,
+      "color": "5"
+    },
+    {
+      "id": "mira-ombudsman-note",
+      "type": "text",
+      "text": "**Mira** (core) daily 20:00, Fri 16:00\nwrites outputs/review/",
+      "x": -1027,
+      "y": 100,
+      "width": 300,
+      "height": 80,
+      "color": "5"
+    },
+    {
+      "id": "selene-archivist",
+      "type": "file",
+      "file": ".claude/skills/selene-archivist/SKILL.md",
+      "x": -540,
+      "y": -700,
+      "width": 300,
+      "height": 180,
+      "color": "5"
+    },
+    {
+      "id": "selene-archivist-note",
+      "type": "text",
+      "text": "**Selene** (core) on a tick\nwrites governance/registry.json, governance/audit-log.md, governance/ledger.md, governance/proposals/, outputs/catalog/, goals.md, pipeline.md, money.md, HOUSE-STYLE.md",
+      "x": -540,
+      "y": -510,
+      "width": 300,
+      "height": 80,
+      "color": "5"
+    }
+  ],
+  "edges": [
+    {
+      "id": "draco-chief-of-staff->owner",
+      "fromNode": "draco-chief-of-staff",
+      "toNode": "owner",
+      "toEnd": "arrow"
+    },
+    {
+      "id": "carina-managing-editor->draco-chief-of-staff",
+      "fromNode": "carina-managing-editor",
+      "toNode": "draco-chief-of-staff",
+      "toEnd": "arrow"
+    },
+    {
+      "id": "carina-managing-editor->selene-archivist",
+      "fromNode": "carina-managing-editor",
+      "toNode": "selene-archivist",
+      "toEnd": "arrow"
+    },
+    {
+      "id": "alcyone-scheduler->draco-chief-of-staff",
+      "fromNode": "alcyone-scheduler",
+      "toNode": "draco-chief-of-staff",
+      "toEnd": "arrow"
+    },
+    {
+      "id": "aurora-reporter->electra-correspondent",
+      "fromNode": "aurora-reporter",
+      "toNode": "electra-correspondent",
+      "toEnd": "arrow"
+    },
+    {
+      "id": "aurora-reporter->carina-managing-editor",
+      "fromNode": "aurora-reporter",
+      "toNode": "carina-managing-editor",
+      "toEnd": "arrow"
+    },
+    {
+      "id": "electra-correspondent->vesper-copy-desk",
+      "fromNode": "electra-correspondent",
+      "toNode": "vesper-copy-desk",
+      "toEnd": "arrow"
+    },
+    {
+      "id": "vesper-copy-desk->owner",
+      "fromNode": "vesper-copy-desk",
+      "toNode": "owner",
+      "toEnd": "arrow"
+    },
+    {
+      "id": "vesper-copy-desk->electra-correspondent",
+      "fromNode": "vesper-copy-desk",
+      "toNode": "electra-correspondent",
+      "toEnd": "arrow"
+    },
+    {
+      "id": "mira-ombudsman->draco-chief-of-staff",
+      "fromNode": "mira-ombudsman",
+      "toNode": "draco-chief-of-staff",
+      "toEnd": "arrow"
+    },
+    {
+      "id": "mira-ombudsman->carina-managing-editor",
+      "fromNode": "mira-ombudsman",
+      "toNode": "carina-managing-editor",
+      "toEnd": "arrow"
+    },
+    {
+      "id": "selene-archivist->owner",
+      "fromNode": "selene-archivist",
+      "toNode": "owner",
+      "toEnd": "arrow"
+    }
+  ]
+}

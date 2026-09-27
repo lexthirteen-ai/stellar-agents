@@ -1,0 +1,220 @@
+{
+  "$schema_note": "One row per star, generated from kit.json by scripts/build_vault.py. goal is copied from the charter's Goal line. write_zones are the only paths the star may create or modify, relative to the vault root. If a charter and this file disagree, this file wins.",
+  "desks": [
+    {
+      "id": "draco-chief-of-staff",
+      "goal": "Every morning, read every other star's latest output and write one brief in the daily note with one thing to do, one thing to leave, and one line per star that runs today, with the seven sections in at most 300 words.",
+      "role": "chief_of_staff",
+      "tier": "core",
+      "cadence": "daily 07:00",
+      "status": "active",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Write"
+      ],
+      "write_zones": [
+        "Daily/"
+      ],
+      "receives_from": [
+        "owner",
+        "carina-managing-editor",
+        "alcyone-scheduler",
+        "mira-ombudsman"
+      ],
+      "hands_to": [
+        "owner"
+      ],
+      "never_autonomous_ack": true
+    },
+    {
+      "id": "carina-managing-editor",
+      "goal": "Once a week, set the week's goal from `goals.md`, score every candidate against it, and name one thing per working day and what is cut, in one plan the owner ticks.",
+      "role": "managing_editor",
+      "tier": "core",
+      "cadence": "Mon 06:15",
+      "status": "active",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Write"
+      ],
+      "write_zones": [
+        "outputs/plan/",
+        "governance/proposals/"
+      ],
+      "receives_from": [
+        "owner",
+        "aurora-reporter",
+        "mira-ombudsman"
+      ],
+      "hands_to": [
+        "draco-chief-of-staff",
+        "selene-archivist"
+      ],
+      "never_autonomous_ack": true
+    },
+    {
+      "id": "alcyone-scheduler",
+      "goal": "Every morning, read the calendar export and the owner's hours and write the day's shape for Draco: heavy, normal, or open with the count that decided it, the fixed points, the open stretches, the calls, and how fresh the calendar is.",
+      "role": "scheduler",
+      "tier": "core",
+      "cadence": "daily 06:50",
+      "status": "active",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Write"
+      ],
+      "write_zones": [
+        "outputs/schedule/"
+      ],
+      "receives_from": [
+        "owner",
+        "schedule"
+      ],
+      "hands_to": [
+        "draco-chief-of-staff"
+      ],
+      "never_autonomous_ack": true
+    },
+    {
+      "id": "aurora-reporter",
+      "goal": "Every morning, read the new inbox export and file one signal note that says what the owner owes, what others owe the owner, which messages are leads, what the owner promised, which pipeline rows moved or went quiet, and what is worth knowing, so nothing is lost and the brief can be written.",
+      "role": "reporter",
+      "tier": "core",
+      "cadence": "daily 06:30",
+      "status": "active",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Write"
+      ],
+      "write_zones": [
+        "outputs/signals/"
+      ],
+      "receives_from": [
+        "owner"
+      ],
+      "hands_to": [
+        "electra-correspondent",
+        "carina-managing-editor"
+      ],
+      "never_autonomous_ack": true
+    },
+    {
+      "id": "electra-correspondent",
+      "goal": "Draft every reply the owner owes and every follow up the owner is owed, one file each, with a context line and the opening line left as the marker, so the owner answers people in minutes and sends nothing unread.",
+      "role": "correspondent",
+      "tier": "core",
+      "cadence": "after every reporter run",
+      "status": "active",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Write"
+      ],
+      "write_zones": [
+        "outputs/drafts/"
+      ],
+      "receives_from": [
+        "owner",
+        "aurora-reporter",
+        "vesper-copy-desk"
+      ],
+      "hands_to": [
+        "vesper-copy-desk"
+      ],
+      "never_autonomous_ack": true
+    },
+    {
+      "id": "vesper-copy-desk",
+      "goal": "Run every draft Electra or Rigel writes through `scripts/copydesk.py` and mark it STAGED for the owner or REJECTED back to the desk that wrote it, with the failing rule named.",
+      "role": "copy_desk",
+      "tier": "core",
+      "cadence": "after every draft",
+      "status": "active",
+      "tools": [
+        "Read",
+        "Glob",
+        "Bash"
+      ],
+      "write_zones": [
+        "outputs/staged/",
+        "outputs/rejected/"
+      ],
+      "receives_from": [
+        "electra-correspondent"
+      ],
+      "hands_to": [
+        "owner",
+        "electra-correspondent"
+      ],
+      "never_autonomous_ack": true
+    },
+    {
+      "id": "mira-ombudsman",
+      "goal": "Every evening, hold the day's plan against what the files show and count what rolled over, and every Friday, report what the week planned, did, slipped, and avoided, and any handoff off the map.",
+      "role": "ombudsman",
+      "tier": "core",
+      "cadence": "daily 20:00, Fri 16:00",
+      "status": "active",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Write"
+      ],
+      "write_zones": [
+        "outputs/review/"
+      ],
+      "receives_from": [
+        "owner",
+        "schedule"
+      ],
+      "hands_to": [
+        "draco-chief-of-staff",
+        "carina-managing-editor"
+      ],
+      "never_autonomous_ack": true
+    },
+    {
+      "id": "selene-archivist",
+      "goal": "Apply every proposal the owner ticked to the owner's record files, log each apply, and keep an append only ledger of every promise the owner confirmed, kept, or dropped.",
+      "role": "archivist",
+      "tier": "core",
+      "cadence": "on a tick",
+      "status": "active",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Write"
+      ],
+      "write_zones": [
+        "governance/registry.json",
+        "governance/audit-log.md",
+        "governance/ledger.md",
+        "governance/proposals/",
+        "outputs/catalog/",
+        "goals.md",
+        "pipeline.md",
+        "money.md",
+        "HOUSE-STYLE.md"
+      ],
+      "receives_from": [
+        "owner",
+        "carina-managing-editor"
+      ],
+      "hands_to": [
+        "owner"
+      ],
+      "never_autonomous_ack": true
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "name": "stellar-agents",
+  "owner": {
+    "name": "charmthirteen",
+    "url": "https://charmthirteen.com"
+  },
+  "metadata": {
+    "description": "Stellar Agents. Eight stars, one human gate, and the morning brief.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "constellation",
+      "source": "./",
+      "description": "Eight agents that plan a solo founder's day, and one of them working: Draco writes the morning brief into an Obsidian daily note from a calendar export and a todo list. Every star stops one step before anything goes out.",
+      "version": "0.1.0",
+      "author": {
+        "name": "charmthirteen"
+      },
+      "homepage": "https://github.com/lexthirteen-ai/stellar-agents",
+      "license": "CC-BY-NC-4.0 for documents, MIT for scripts",
+      "keywords": [
+        "agents",
+        "skills",
+        "governance",
+        "human-in-the-loop"
+      ],
+      "category": "productivity"
+    }
+  ]
+}

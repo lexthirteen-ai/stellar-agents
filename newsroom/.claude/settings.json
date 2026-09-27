@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      { "matcher": "Write|Edit|MultiEdit|NotebookEdit", "hooks": [ { "type": "command", "command": "python3 \"${NEWSROOM_SCRIPTS:-scripts}/hooks/write-zone.py\"" } ] },
+      { "matcher": "Bash|WebFetch|WebSearch", "hooks": [ { "type": "command", "command": "python3 \"${NEWSROOM_SCRIPTS:-scripts}/hooks/never-autonomous.py\"" } ] }
+    ],
+    "PostToolUse": [
+      { "matcher": "Write|Edit|MultiEdit", "hooks": [ { "type": "command", "command": "python3 \"${NEWSROOM_SCRIPTS:-scripts}/hooks/provenance.py\"" } ] }
+    ],
+    "Stop": [
+      { "hooks": [ { "type": "command", "command": "python3 \"${NEWSROOM_SCRIPTS:-scripts}/hooks/audit.py\"" } ] }
+    ]
+  }
+}
