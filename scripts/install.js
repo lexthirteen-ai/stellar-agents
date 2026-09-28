@@ -55,8 +55,8 @@ ${KIT.name} v${KIT.version}
   OpenClaw      ~/.agents/skills/<name>/  (persona in each star's SOUL.md)
   Hermes        ~/.hermes/skills/${GROUP}/<name>/
 
-  Claude Code also installs as a plugin: /plugin marketplace add ./stellar-agents
-  Any of 100+ tools: npx skills add ./stellar-agents
+  Claude Code also installs as a plugin, from inside this folder: /plugin marketplace add .
+  Any of 100+ tools, from inside this folder: npx skills add .   (skills only; the vault comes from --vault)
 `); process.exit(0);
 }
 

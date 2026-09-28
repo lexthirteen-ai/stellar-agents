@@ -8,8 +8,11 @@ This free kit gives you the whole team as charters and cards, and one star worki
 
 ## Your first brief, in ten minutes
 
+Unzip the release. The folder it makes carries the version in its name, so move into it first; every command in this README runs from inside it.
+
 ```bash
-node scripts/install.js --tools claude --vault ~/stellar   # the starter vault, with Draco inside
+cd ~/Downloads/stellar-agents-v0.1.1                       # the unzipped folder; match the version you downloaded
+node scripts/install.js --tools claude --vault ~/stellar   # the starter vault, with Draco inside (--tools codex for Codex)
 open ~/stellar                                             # open the folder in Obsidian as a vault
 ```
 
@@ -42,12 +45,14 @@ Each star is a folder under `.agents/`: a charter in eight parts, a `SOUL.md` fo
 
 ## Install, in the tool you already use
 
-| Tool | Native command | Where it lands | Page |
+**Start with the kit's own installer: `node scripts/install.js --tools <your tool> --vault ~/stellar`.** It is the only install that gives you the vault and the runner Draco's brief needs. The native commands below bring the charters and skills only. Run each one from inside the unzipped folder, which is what the `.` means.
+
+| Tool | Native command, skills only | Where it lands | Page |
 |---|---|---|---|
-| Claude Code | `/plugin marketplace add ./stellar-agents, then /plugin install constellation@stellar-agents` | `~/.claude/skills/ and ~/.claude/agents/` | [claude-code](integrations/claude-code/README.md) |
-| Codex | `npx skills add ./stellar-agents --agent codex` | `~/.agents/skills/` | [codex](integrations/codex/README.md) |
-| Gemini CLI | `gemini skills install ./stellar-agents/.agents/<star>` | `~/.gemini/skills/` | [gemini-cli](integrations/gemini-cli/README.md) |
-| OpenClaw | `openclaw skills install ./.agents/<star> --as <id>, from the unzipped folder` | `~/.agents/skills/` | [openclaw](integrations/openclaw/README.md) |
+| Claude Code | `/plugin marketplace add .`, then `/plugin install constellation@stellar-agents` | `~/.claude/skills/ and ~/.claude/agents/` | [claude-code](integrations/claude-code/README.md) |
+| Codex | `npx skills add . --agent codex` | `~/.agents/skills/` | [codex](integrations/codex/README.md) |
+| Gemini CLI | `gemini skills install ./.agents/<star>` | `~/.gemini/skills/` | [gemini-cli](integrations/gemini-cli/README.md) |
+| OpenClaw | `openclaw skills install ./.agents/<star> --as <id>` | `~/.agents/skills/` | [openclaw](integrations/openclaw/README.md) |
 | Hermes | `node scripts/install.js --tools hermes` | `~/.hermes/skills/constellation/` | [hermes](integrations/hermes/README.md) |
 
 `node scripts/install.js --tools all` writes all of them at once. `--dry-run` shows what it would write first.

@@ -194,6 +194,15 @@ def main():
         page = os.path.join(ROOT, tool.get("page", "integrations/" + tool["key"]), "README.md")
         if not os.path.exists(page): fail(f"integrations: no page for {tool['label']} ({rel(page)})")
         if not (TOOLS_JS := open(os.path.join(ROOT, "scripts", "install.js")).read()) or f"  {tool['key']}:" not in TOOLS_JS: fail(f"install.js: no TOOLS entry for {tool['key']}")
+    # The zip unzips to <name>-v<version>, so no install instruction may point at ./stellar-agents or
+    # ./stellar-agents-ascension: that folder never exists. Commands run from inside the unzipped folder (".").
+    bad_path = re.compile(r"\./stellar-agents(-ascension)?(?![-\w])")
+    docs = ["README.md", "kit.json", "scripts/install.js", "scripts/free/README.md"] + glob.glob(os.path.join(ROOT, "integrations", "**", "*.md"), recursive=True) + glob.glob(os.path.join(ROOT, "docs", "*.md"))
+    for d in docs:
+        p = d if os.path.isabs(d) else os.path.join(ROOT, d)
+        if os.path.exists(p):
+            for n, line in enumerate(open(p, encoding="utf-8"), 1):
+                if bad_path.search(line): fail(f"{rel(p)}:{n}: install path ./stellar-agents... never exists (the zip unzips to <name>-v<version>); cd into the folder and use .")
     # evals recorded since the last charter change
     latest = os.path.join(ROOT, "evals", "results", "latest.json")
     if os.path.exists(latest):
@@ -242,11 +251,11 @@ def main():
         if PRIVATE.search(text): fail(f"{f}: carries a private title that never ships")
         if f != "CHANGELOG.md" and not (f.startswith("evals/") and "/input/" in f):
             if PRICE in text or STORE in text: fail(f"{f}: carries a price or the old store link")
-        if f.endswith(".md") and not ("evals/" in f and "/input/" in f) and "fixtures/" not in f and f != "CHANGELOG.md":
+        if f.endswith(".md") and not ("evals/" in f and "/input/" in f) and not f.startswith("evals/results/") and "fixtures/" not in f and f != "CHANGELOG.md":
             for m in PRONOUN.finditer(re.sub(r"`[^`]*`", "", text)):
                 line = text.count("\n", 0, m.start()) + 1
                 fail(f"{f}:{line}: pronoun '{m.group(0)}'; call a star by name or 'it', the owner 'you' or 'the owner'"); break
-        if f.endswith(".md") and "\u2014" in text and not (f.startswith("evals/") and "/input/" in f) and "fixtures/" not in f:
+        if f.endswith(".md") and "\u2014" in text and not (f.startswith("evals/") and "/input/" in f) and not f.startswith("evals/results/") and "fixtures/" not in f:
             fail(f"{f}: em dash in prose")
     # duplicates
     try:
@@ -256,7 +265,7 @@ def main():
     seen = {}
     for f in files:
         p = os.path.join(ROOT, f)
-        if not os.path.exists(p) or "/node_modules/" in p or f.startswith("evals/") and "/input/" in f: continue  # eval fixtures may repeat on purpose
+        if not os.path.exists(p) or "/node_modules/" in p or f.startswith("evals/") and ("/input/" in f or f.startswith("evals/results/")) or "fixtures/" in f: continue  # eval fixtures may repeat on purpose
         h = hashlib.sha256(open(p, "rb").read()).hexdigest()
         if h in seen: fail(f"duplicate content: {f} == {seen[h]}")
         else: seen[h] = f

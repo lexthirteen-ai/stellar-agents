@@ -2,16 +2,19 @@
 
 ## Install
 
-From the folder that holds the unzipped release:
+Move into the unzipped release first. Its folder name carries the version, for example `stellar-agents-v0.1.1`:
 
 ```bash
-npx skills add ./stellar-agents --agent codex
+cd ~/Downloads/stellar-agents-v0.1.1
+node scripts/install.js --tools codex --vault ~/stellar
 ```
 
-That is the skills CLI Codex users already use, pointed at a local folder, and `--global` puts the skills in your home folder. Or the kit's own installer:
+That writes every star to `~/.agents/skills/` for Codex and builds the vault with the runner, which the skills CLI cannot do. To run a star through Codex from the vault: `cd ~/stellar && python3 scripts/newsroom.py run draco-chief-of-staff --backend codex --trigger owner --task "Write today's brief."`
+
+If you only want the skills, the skills CLI Codex users already know works from inside the same folder, with `--global` for your home folder:
 
 ```bash
-node scripts/install.js --tools codex
+npx skills add . --agent codex
 ```
 
 Add `--project` to install into the current repo's `.agents/skills/` instead of your home folder.

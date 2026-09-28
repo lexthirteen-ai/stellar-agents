@@ -2,10 +2,10 @@
 
 ## Install
 
-Inside Claude Code, from the folder that holds the unzipped release:
+Start Claude Code inside the unzipped release folder (its name carries the version, for example `cd ~/Downloads/stellar-agents-v0.1.1`), then:
 
 ```
-/plugin marketplace add ./stellar-agents
+/plugin marketplace add .
 /plugin install constellation@stellar-agents
 ```
 

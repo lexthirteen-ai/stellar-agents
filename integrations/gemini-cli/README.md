@@ -2,10 +2,11 @@
 
 ## Install
 
-Gemini CLI installs a skill from a local folder, so from the folder that holds the unzipped release, one star at a time:
+Gemini CLI installs a skill from a local folder. Move into the unzipped release first (its folder name carries the version, for example `stellar-agents-v0.1.1`), then one star at a time:
 
 ```bash
-gemini skills install ./stellar-agents/.agents/aurora --consent
+cd ~/Downloads/stellar-agents-v0.1.1
+gemini skills install ./.agents/aurora --consent
 ```
 
 Or the kit's own installer, which writes every star and skill into this tool's folder in one go with `node scripts/install.js --tools gemini`, or all five tools with `--tools all`.

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1
+
+The install instructions pointed at `./stellar-agents`, a folder the download never makes: the zip unzips to `stellar-agents-v<version>`. Every install command now runs from inside the unzipped folder, starting with `cd` into it, and the native commands use `.` for the folder. The README leads with the kit's own installer, `node scripts/install.js --tools <tool> --vault ~/stellar`, because the native commands bring the skills only, with no vault and no runner. Mira's charter also catches up with Ascension's: only a box you ticked counts as done, and a staged draft is not done, because it still waits on you to send it. The free 0.1.0 had shipped the charter from before that fix.
+
 ## 0.1.0
 
 The first release of Stellar Agents, the free kit.

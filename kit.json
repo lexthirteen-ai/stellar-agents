@@ -1,6 +1,6 @@
 {
   "name": "Stellar Agents",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "group": "constellation",
   "guide": ".agents/guide",
   "runtime": {
@@ -15,28 +15,28 @@
       "key": "claude",
       "label": "Claude Code",
       "global": "~/.claude/skills/ and ~/.claude/agents/",
-      "native": "/plugin marketplace add ./stellar-agents, then /plugin install constellation@stellar-agents",
+      "native": "/plugin marketplace add ., then /plugin install constellation@stellar-agents",
       "page": "integrations/claude-code"
     },
     {
       "key": "codex",
       "label": "Codex",
       "global": "~/.agents/skills/",
-      "native": "npx skills add ./stellar-agents --agent codex",
+      "native": "npx skills add . --agent codex",
       "page": "integrations/codex"
     },
     {
       "key": "gemini",
       "label": "Gemini CLI",
       "global": "~/.gemini/skills/",
-      "native": "gemini skills install ./stellar-agents/.agents/<star>",
+      "native": "gemini skills install ./.agents/<star>",
       "page": "integrations/gemini-cli"
     },
     {
       "key": "openclaw",
       "label": "OpenClaw",
       "global": "~/.agents/skills/",
-      "native": "openclaw skills install ./.agents/<star> --as <id>, from the unzipped folder",
+      "native": "openclaw skills install ./.agents/<star> --as <id>",
       "page": "integrations/openclaw"
     },
     {

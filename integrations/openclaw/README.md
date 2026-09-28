@@ -2,13 +2,13 @@
 
 ## Install
 
-From the unzipped release folder, one star at a time with OpenClaw's own command:
+Move into the unzipped release first (its folder name carries the version, for example `cd ~/Downloads/stellar-agents-v0.1.1`), then one star at a time with OpenClaw's own command:
 
 ```bash
 openclaw skills install ./.agents/<star> --as <id>
 ```
 
-Or the skills CLI pointed at the folder, `npx skills add ./stellar-agents --agent openclaw`, or the kit's own installer:
+Or the skills CLI from the same folder, `npx skills add . --agent openclaw`, or the kit's own installer:
 
 ```bash
 node scripts/install.js --tools openclaw
