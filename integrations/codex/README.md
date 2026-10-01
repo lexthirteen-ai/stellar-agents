@@ -2,18 +2,18 @@
 
 ## Install
 
-Move into the unzipped release first. Its folder name carries the version, for example `stellar-agents-v0.1.1`:
+Double-click the zip. It unzips to a folder called `stellar-agents`, the same name every release. Then, from any Terminal window:
 
 ```bash
-cd ~/Downloads/stellar-agents-v0.1.1
-node scripts/install.js --tools codex --vault ~/stellar
+node ~/Downloads/stellar-agents/scripts/install.js --tools codex --vault ~/stellar
 ```
 
-That writes every star to `~/.agents/skills/` for Codex and builds the vault with the runner, which the skills CLI cannot do. To run a star through Codex from the vault: `cd ~/stellar && python3 scripts/newsroom.py run draco-chief-of-staff --backend codex --trigger owner --task "Write today's brief."`
+That writes every star to `~/.agents/skills/` for Codex and builds the vault with the runner, which the skills CLI cannot do. To run a star through Codex, from any folder: `python3 ~/stellar/scripts/newsroom.py run draco-chief-of-staff --backend codex --trigger owner --task "Write today's brief."`
 
-If you only want the skills, the skills CLI Codex users already know works from inside the same folder, with `--global` for your home folder:
+If you only want the skills, the skills CLI Codex users already know reads the folder you are in, with `--global` for your home folder:
 
 ```bash
+cd ~/Downloads/stellar-agents
 npx skills add . --agent codex
 ```
 
@@ -33,6 +33,6 @@ Use the constellation skills in ~/.agents/skills for reporting, drafting, and ch
 
 The installer never edits `AGENTS.md` for you. It prints that line and leaves the choice with you.
 
-The plugin and the skills CLI bring the stars and their working skills. The vault, the runner, the hooks, and the evals come only from `node scripts/install.js --vault <dir>` in the unzipped release. See [docs/runtime.md](../../docs/runtime.md).
+The plugin and the skills CLI bring the stars and their working skills. The vault, the runner, the hooks, and the evals come only from `node ~/Downloads/stellar-agents/scripts/install.js --vault <dir>` in the unzipped release. See [docs/runtime.md](../../docs/runtime.md).
 
 Back to the [main README](../../README.md).

@@ -1,6 +1,6 @@
 {
   "name": "stellar-agents",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Eight agents that plan a solo founder's day, and one of them working: Draco writes the morning brief into an Obsidian daily note from a calendar export and a todo list. Every star stops one step before anything goes out.",
   "bin": {
     "stellar-agents": "scripts/install.js"

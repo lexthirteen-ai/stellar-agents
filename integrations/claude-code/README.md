@@ -2,7 +2,7 @@
 
 ## Install
 
-Start Claude Code inside the unzipped release folder (its name carries the version, for example `cd ~/Downloads/stellar-agents-v0.1.1`), then:
+Start Claude Code inside the unzipped folder (`cd ~/Downloads/stellar-agents`, the same name every release), then:
 
 ```
 /plugin marketplace add .
@@ -12,7 +12,7 @@ Start Claude Code inside the unzipped release folder (its name carries the versi
 That loads every star as a skill and as a subagent, namespaced `constellation:<name>`, with each star's working skills beside them. When a new release lands, unzip it over the same folder and run `/plugin update`. Or from a terminal, the kit's own installer:
 
 ```bash
-node scripts/install.js --tools claude
+node ~/Downloads/stellar-agents/scripts/install.js --tools claude
 ```
 
 Add `--project` to install into the current repo's `.claude/` instead of your home folder.
@@ -33,6 +33,6 @@ Skills load when a task matches their description. To call a star as a subagent,
 
 Copy `.agents/<star>/` (the files, not the skill subfolders) to `~/.claude/skills/<id>/`, and each `.agents/<star>/<skill>/` to `~/.claude/skills/<skill>/`. For the subagent file, copy `SKILL.md` to `~/.claude/agents/<id>.md` and keep its `tools:` line.
 
-The plugin and the skills CLI bring the stars and their working skills. The vault, the runner, the hooks, and the evals come only from `node scripts/install.js --vault <dir>` in the unzipped release. See [docs/runtime.md](../../docs/runtime.md).
+The plugin and the skills CLI bring the stars and their working skills. The vault, the runner, the hooks, and the evals come only from `node ~/Downloads/stellar-agents/scripts/install.js --vault <dir>` in the unzipped release. See [docs/runtime.md](../../docs/runtime.md).
 
 Back to the [main README](../../README.md).

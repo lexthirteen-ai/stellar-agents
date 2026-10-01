@@ -8,19 +8,24 @@ This free kit gives you the whole team as charters and cards, and one star worki
 
 ## Your first brief, in ten minutes
 
-Unzip the release. The folder it makes carries the version in its name, so move into it first; every command in this README runs from inside it.
+Download the zip and double-click it. It makes a folder called `stellar-agents` in your Downloads, the same name for every release. If an older one is already there, move it to the Trash first, or the Mac names the new one `stellar-agents 2`. Your vault lives in its own folder, so nothing of yours is in there. Every command below works from any Terminal window, so there is nothing to `cd` into first.
 
-```bash
-cd ~/Downloads/stellar-agents-v0.1.1                       # the unzipped folder; match the version you downloaded
-node scripts/install.js --tools claude --vault ~/stellar   # the starter vault, with Draco inside (--tools codex for Codex)
-open ~/stellar                                             # open the folder in Obsidian as a vault
-```
+1. Build the starter vault with Draco inside. For Codex, use `--tools codex` instead of `--tools claude`.
 
-1. Fill in `HOUSE-STYLE.md`, at least the Hours section.
-2. Write your list in `todo.md`, one item a line. Put `!` in front of the one that matters most today.
-3. Drop a calendar export for today in `inputs/calendar/`. A pasted table or a CSV is enough.
-4. In Claude Code, from the vault folder, ask for the morning brief. Or run `python3 scripts/newsroom.py run draco-chief-of-staff --trigger owner --task "Write today's brief."`
-5. Open today's daily note. The brief is there. Tick the boxes as the day goes.
+   ```bash
+   node ~/Downloads/stellar-agents/scripts/install.js --tools claude --vault ~/stellar
+   ```
+
+   Unzipped somewhere else? Type `node `, drag `scripts/install.js` from the folder into the Terminal window, and it pastes the full path. Then add the rest of the line.
+2. Open `~/stellar` in Obsidian as a vault. Fill in `HOUSE-STYLE.md`, at least the Hours section.
+3. Write your list in `todo.md`, one item a line. Put `!` in front of the one that matters most today.
+4. Drop a calendar export for today in `inputs/calendar/`. A pasted table or a CSV is enough.
+5. Ask for the morning brief, in Claude Code from the vault folder, or from any Terminal window (with Codex, add `--backend codex`):
+
+   ```bash
+   python3 ~/stellar/scripts/newsroom.py run draco-chief-of-staff --trigger owner --task "Write today's brief."
+   ```
+6. Open today's daily note. The brief is there. Tick the boxes as the day goes.
 
 Tomorrow's brief counts what rolled over from today. At three days it asks you to do it or drop it.
 
@@ -45,7 +50,7 @@ Each star is a folder under `.agents/`: a charter in eight parts, a `SOUL.md` fo
 
 ## Install, in the tool you already use
 
-**Start with the kit's own installer: `node scripts/install.js --tools <your tool> --vault ~/stellar`.** It is the only install that gives you the vault and the runner Draco's brief needs. The native commands below bring the charters and skills only. Run each one from inside the unzipped folder, which is what the `.` means.
+**Start with the kit's own installer: `node ~/Downloads/stellar-agents/scripts/install.js --tools <your tool> --vault ~/stellar`.** It is the only install that gives you the vault and the runner Draco's brief needs, and it works from any folder. The native commands below bring the charters and skills only, and they read the folder you are in, so run `cd ~/Downloads/stellar-agents` first. That is what the `.` means.
 
 | Tool | Native command, skills only | Where it lands | Page |
 |---|---|---|---|
@@ -53,9 +58,9 @@ Each star is a folder under `.agents/`: a charter in eight parts, a `SOUL.md` fo
 | Codex | `npx skills add . --agent codex` | `~/.agents/skills/` | [codex](integrations/codex/README.md) |
 | Gemini CLI | `gemini skills install ./.agents/<star>` | `~/.gemini/skills/` | [gemini-cli](integrations/gemini-cli/README.md) |
 | OpenClaw | `openclaw skills install ./.agents/<star> --as <id>` | `~/.agents/skills/` | [openclaw](integrations/openclaw/README.md) |
-| Hermes | `node scripts/install.js --tools hermes` | `~/.hermes/skills/constellation/` | [hermes](integrations/hermes/README.md) |
+| Hermes | `node ~/Downloads/stellar-agents/scripts/install.js --tools hermes` | `~/.hermes/skills/constellation/` | [hermes](integrations/hermes/README.md) |
 
-`node scripts/install.js --tools all` writes all of them at once. `--dry-run` shows what it would write first.
+`node ~/Downloads/stellar-agents/scripts/install.js --tools all` writes all of them at once. `--dry-run` shows what it would write first.
 
 ## When you move to Ascension
 

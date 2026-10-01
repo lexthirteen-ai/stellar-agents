@@ -1,6 +1,6 @@
 {
   "name": "Stellar Agents",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "group": "constellation",
   "guide": ".agents/guide",
   "runtime": {

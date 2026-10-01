@@ -24,11 +24,12 @@ jobs:
         if: env.SKIP != '1'
         run: |
           set -euo pipefail
-          NAME="stellar-agents-${TAG}"
-          mkdir -p "dist/${NAME}"
-          git archive --format=tar HEAD | tar -x -C "dist/${NAME}"
-          rm -rf "dist/${NAME}/.github"
-          (cd dist && zip -qr "${NAME}.zip" "${NAME}")
+          DIR="stellar-agents"      # the folder people unzip; never versioned, so docs paths stay right
+          NAME="${DIR}-${TAG}"      # the zip carries the version
+          mkdir -p "dist/${DIR}"
+          git archive --format=tar HEAD | tar -x -C "dist/${DIR}"
+          rm -rf "dist/${DIR}/.github"
+          (cd dist && zip -qr "${NAME}.zip" "${DIR}")
           echo "ZIP=dist/${NAME}.zip" >> "$GITHUB_ENV"
           awk '/^## /{n++} n==1' CHANGELOG.md | tail -n +2 > release-notes.tmp
       - name: Create the GitHub Release

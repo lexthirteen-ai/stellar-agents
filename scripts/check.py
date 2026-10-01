@@ -197,12 +197,15 @@ def main():
     # The zip unzips to <name>-v<version>, so no install instruction may point at ./stellar-agents or
     # ./stellar-agents-ascension: that folder never exists. Commands run from inside the unzipped folder (".").
     bad_path = re.compile(r"\./stellar-agents(-ascension)?(?![-\w])")
+    # The folder inside the zip is never versioned (release.yml), so a versioned folder path in the docs is stale by design.
+    versioned = re.compile(r"stellar-agents(-ascension)?-v\d+\.\d+\.\d+(?!\.zip)")
     docs = ["README.md", "kit.json", "scripts/install.js", "scripts/free/README.md"] + glob.glob(os.path.join(ROOT, "integrations", "**", "*.md"), recursive=True) + glob.glob(os.path.join(ROOT, "docs", "*.md"))
     for d in docs:
         p = d if os.path.isabs(d) else os.path.join(ROOT, d)
         if os.path.exists(p):
             for n, line in enumerate(open(p, encoding="utf-8"), 1):
-                if bad_path.search(line): fail(f"{rel(p)}:{n}: install path ./stellar-agents... never exists (the zip unzips to <name>-v<version>); cd into the folder and use .")
+                if bad_path.search(line): fail(f"{rel(p)}:{n}: install path ./stellar-agents... is relative to a folder you are not in; use the full path, e.g. ~/Downloads/stellar-agents-ascension/scripts/install.js")
+                if versioned.search(line): fail(f"{rel(p)}:{n}: versioned folder path; the zip unzips to an unversioned folder (stellar-agents-ascension / stellar-agents)")
     # evals recorded since the last charter change
     latest = os.path.join(ROOT, "evals", "results", "latest.json")
     if os.path.exists(latest):

@@ -2,14 +2,14 @@
 
 ## Install
 
-Gemini CLI installs a skill from a local folder. Move into the unzipped release first (its folder name carries the version, for example `stellar-agents-v0.1.1`), then one star at a time:
+Gemini CLI installs a skill from a local folder. Move into the unzipped folder first (it is always called `stellar-agents`), then one star at a time:
 
 ```bash
-cd ~/Downloads/stellar-agents-v0.1.1
+cd ~/Downloads/stellar-agents
 gemini skills install ./.agents/aurora --consent
 ```
 
-Or the kit's own installer, which writes every star and skill into this tool's folder in one go with `node scripts/install.js --tools gemini`, or all five tools with `--tools all`.
+Or the kit's own installer, which writes every star and skill into this tool's folder in one go with `node ~/Downloads/stellar-agents/scripts/install.js --tools gemini`, or all five tools with `--tools all`.
 
 ## Where files land
 
@@ -19,6 +19,6 @@ Gemini CLI reads `~/.gemini/skills/<name>/` and `~/.agents/skills/<name>/` at us
 
 Gemini activates a skill through its `activate_skill` tool when a task matches, after a confirmation prompt that names the skill and its folder. Say yes, and the charter is in context.
 
-The plugin and the skills CLI bring the stars and their working skills. The vault, the runner, the hooks, and the evals come only from `node scripts/install.js --vault <dir>` in the unzipped release. See [docs/runtime.md](../../docs/runtime.md).
+The plugin and the skills CLI bring the stars and their working skills. The vault, the runner, the hooks, and the evals come only from `node ~/Downloads/stellar-agents/scripts/install.js --vault <dir>` in the unzipped release. See [docs/runtime.md](../../docs/runtime.md).
 
 Back to the [main README](../../README.md).

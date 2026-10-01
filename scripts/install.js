@@ -32,7 +32,8 @@ if (flag("help") || flag("h")) {
   console.log(`
 ${KIT.name} v${KIT.version}
 
-  node scripts/install.js [options]            from the unzipped release folder
+  node <unzipped folder>/scripts/install.js [options]   works from any folder, e.g.
+  node ~/Downloads/stellar-agents-ascension/scripts/install.js --tools codex --vault ~/newsroom
 
   --tools claude,codex,gemini,openclaw,hermes,all
                                              which tools to install into (asks if omitted)
@@ -289,6 +290,11 @@ function installPack(name, tools, base) {
   console.log(`\n  ${dry ? "would write" : "wrote"} ${n("write") + n("would")}, skipped ${n("skip")}`);
   if (tools.includes("codex")) console.log(`\nCodex loads skills on demand. To keep a star always on, add one line to AGENTS.md, for example:\n  Use the ${GROUP} skills in ~/.agents/skills for reporting, drafting, and checking. Nothing is sent without a human.`);
   if (tools.includes("openclaw")) console.log(`\nOpenClaw: each star's persona is its SOUL.md. To run a star as its own agent, copy that file into the agent's workspace as SOUL.md.`);
-  if (vault) console.log(`\nVault at ${path.resolve(vault)}. Open it in Obsidian, fill in HOUSE-STYLE.md, then: cd ${path.resolve(vault)} && python3 scripts/newsroom.py status\nThe dashboard needs one install: pip install -r scripts/dashboard/requirements.txt, then python3 scripts/newsroom.py dashboard`);
+  if (vault) {
+    // Full paths, so the next commands work from any Terminal window with no cd.
+    const v = path.resolve(vault), run = `python3 "${path.join(v, "scripts", "newsroom.py")}"`;
+    const backend = tools.includes("codex") && !tools.includes("claude") ? " --backend codex" : "";
+    console.log(`\nVault at ${v}. Open it in Obsidian and fill in HOUSE-STYLE.md. Then, from any Terminal window:\n  ${run} status\n  ${run} run draco-chief-of-staff${backend} --task "Write today's brief."\nThe dashboard needs one install: pip install -r "${path.join(v, "scripts", "dashboard", "requirements.txt")}", then ${run} dashboard`);
+  }
   console.log(`\nNothing here sends, spends, publishes, or schedules. That step stays with you.\n`);
 })().catch((e) => { console.error(e.message || e); process.exit(1); });

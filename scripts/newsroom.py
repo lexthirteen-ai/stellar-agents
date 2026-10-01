@@ -7,7 +7,8 @@
     python3 scripts/newsroom.py dashboard       # the vault as a page on 127.0.0.1:8787, needs pip install streamlit
     python3 scripts/newsroom.py run <desk-id> --task "..." --dry-run   # print the command, touch nothing
 
-Where the vault is: --vault <dir>, else NEWSROOM_VAULT, else the current folder if it holds NEWSROOM.md.
+Where the vault is: --vault <dir>, else NEWSROOM_VAULT, else the current folder if it holds NEWSROOM.md,
+else the vault this copy of the script lives in. So `python3 ~/newsroom/scripts/newsroom.py status` works from any folder.
 
 What a run does, in order:
   1. Builds the prompt: the run time, the trigger, the vault path, the task, the input paths.
@@ -50,10 +51,11 @@ ASSIGN_TO = re.compile(r"assign to ([a-z0-9-]+)")
 
 
 def find_vault(arg):
-    for cand in [arg, os.environ.get("NEWSROOM_VAULT"), os.getcwd()]:
+    for cand in [arg, os.environ.get("NEWSROOM_VAULT"), os.getcwd(), os.path.dirname(HERE)]:
         if cand and os.path.exists(os.path.join(cand, "NEWSROOM.md")):
             return os.path.abspath(cand)
-    sys.exit("No vault found. Pass --vault <dir>, or run from a folder that holds NEWSROOM.md.")
+    sys.exit("No vault found. Run the copy of this script inside your vault, for example "
+             "python3 ~/newsroom/scripts/newsroom.py status, or pass --vault <dir>.")
 
 
 def snapshot(vault):
