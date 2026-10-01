@@ -9,7 +9,7 @@ cd ~/Downloads/stellar-agents
 gemini skills install ./.agents/aurora --consent
 ```
 
-Or the kit's own installer, which writes every star and skill into this tool's folder in one go with `node ~/Downloads/stellar-agents/scripts/install.js --tools gemini`, or all five tools with `--tools all`.
+Or the kit's own installer, which writes every star and skill into this tool's folder in one go with `node ~/Downloads/stellar-agents/scripts/install.js --tools gemini`.
 
 ## Where files land
 

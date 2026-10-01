@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3
+
+The README no longer suggests installing for every tool at once: the installer writes files only for the tools you name after `--tools`, for example `--tools codex`. No charter or skill changed.
+
 ## 0.1.2
 
 The folder inside the zip is now always `stellar-agents`, with no version in its name, so the paths in this README stay right from release to release. The installer and the runner both work by full path from any Terminal window: `node ~/Downloads/stellar-agents/scripts/install.js --tools codex --vault ~/stellar`, then `python3 ~/stellar/scripts/newsroom.py run ...`. No charter or skill changed.

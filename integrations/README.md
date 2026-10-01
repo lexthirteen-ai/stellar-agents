@@ -1,6 +1,6 @@
 # Integrations
 
-One page per tool: the command its users already know, where the files land, and how to call a star. The zip unzips to a folder called `stellar-agents`, the same name every release. The kit's own installer runs from any folder by its full path; the tools' native commands read the folder you are in, so `cd ~/Downloads/stellar-agents` first for those. Every page also names the kit's own installer, which does all five at once: `node ~/Downloads/stellar-agents/scripts/install.js --tools all`.
+One page per tool: the command its users already know, where the files land, and how to call a star. The zip unzips to a folder called `stellar-agents`, the same name every release. The kit's own installer runs from any folder by its full path; the tools' native commands read the folder you are in, so `cd ~/Downloads/stellar-agents` first for those. Every page also names the kit's own installer, which writes files only for the tool you name after `--tools`.
 
 | Tool | Page |
 |---|---|

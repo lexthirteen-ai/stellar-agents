@@ -60,7 +60,7 @@ Each star is a folder under `.agents/`: a charter in eight parts, a `SOUL.md` fo
 | OpenClaw | `openclaw skills install ./.agents/<star> --as <id>` | `~/.agents/skills/` | [openclaw](integrations/openclaw/README.md) |
 | Hermes | `node ~/Downloads/stellar-agents/scripts/install.js --tools hermes` | `~/.hermes/skills/constellation/` | [hermes](integrations/hermes/README.md) |
 
-`node ~/Downloads/stellar-agents/scripts/install.js --tools all` writes all of them at once. `--dry-run` shows what it would write first.
+The installer writes files only for the tools you name, for example `--tools codex`, or several with commas. `--dry-run` shows what it would write first.
 
 ## When you move to Ascension
 
